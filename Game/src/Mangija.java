@@ -5,6 +5,7 @@ public class Mangija {
     int yCoord;
     char Symbol;
     Suund suund;
+    Ese ese; //klassikomplekt
 
     public Mangija(Random random, int kaardiKorgus, int kaardiLaius) {
         xCoord = saaKoordinaat(random, kaardiLaius);

@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,21 +20,24 @@ public class Main {
         Draakon draakon = new Draakon(random, maailm.kaardiKorgus, maailm.kaardiLaius);
         //ork
         Ork ork = new Ork(random, maailm.kaardiKorgus, maailm.kaardiLaius);
+        Ese m66k = new Ese("Mõõk",10,1, random, maailm);
+        Ese haamer = new Ese("Haamer",5,3, random, maailm);
+        Ese saabas = new Ese("Saabas",1,5, random, maailm);
+        List<Ese> esemed = new ArrayList<>();
+        esemed.add(m66k);
+        esemed.add(haamer);
+        esemed.add(saabas);
 
         // import java.util.Scanner;
         Scanner scanner = new Scanner(System.in); // järgmine tund selgitame lähemalt
 
-        maailm.prindiKaart(mangija, draakon, ork);
+        maailm.prindiKaart(mangija, draakon, ork, esemed);
         String sisend = scanner.nextLine();
-
-        //mängija switch
 
         mangija.liigu(sisend, maailm);
 
-        // if (boolean || andbmebaasiKüsimine())
-        // if (boolean && andbmebaasiKüsimine())
         while (!sisend.equals("end")) { // .equals --> ==    !m.equals() --> !=
-            maailm.prindiKaart(mangija, draakon, ork);
+            maailm.prindiKaart(mangija, draakon, ork, esemed);
             sisend = scanner.nextLine();
             mangija.liigu(sisend, maailm);
         }
