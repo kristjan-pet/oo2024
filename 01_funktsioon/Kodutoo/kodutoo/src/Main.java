@@ -6,8 +6,8 @@ public class Main {
         System.out.println(price1);
         System.out.println(price2);
 
-        int apply1 = applyTotalPrice(false, 2);
-        int apply2 = applyTotalPrice(true, 2);
+        int apply1 = applyTotalPrice(false, 12);
+        int apply2 = applyTotalPrice(true, 22);
         System.out.println(apply1);
         System.out.println(apply2);
 
@@ -21,8 +21,8 @@ public class Main {
     }
 
     private static int applyTotalPrice(boolean apply, int price) {
-        if (apply == true) {
-            return price + 12;
+        if (apply) {
+            return price + 10;
         } else {
             return price;
         }
