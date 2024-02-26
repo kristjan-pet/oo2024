@@ -1,11 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        Info info = new Info("MacBook", 16, "Intel");
-        Arvuti arvuti = new Arvuti(info, 1000, "Kristiine");
-        arvuti.muudapoodi("Mustamäe");
-        arvuti.info.muudaNimetus("Mac Pro");
+        Info info = new Info("MacBook", 16, "Intel", "1080p");
+        Computer computer = new Computer(info, 1000, "Euronics");
+        computer.changeStore("ONOFF");
+        computer.info.changeName("Mac Pro");
+        System.out.println(computer.store + " " + computer.info.name + " " + computer.cost + "€" + computer.info.ram + " RAM");
 
-        Arvuti arvuti2 = new Arvuti(new Info("Dell", 32, "Intel"), 1100, "Ülemiste");
-        arvuti2.paneAllahindlus(200);
+        Computer computer2 = new Computer(new Info("Dell", 32, "Intel", "720p"), 1100, "ONOFF");
+        computer2.getDiscount(200);
+        computer2.info.changeRes("2k");
+        computer2.info.addRam(32);
+        System.out.println(computer2.store + " " + computer2.info.name + " " + computer2.cost + "€ "  + computer2.info.ram + " RAM " + computer2.info.resolution + " Resolution");
     }
 }
