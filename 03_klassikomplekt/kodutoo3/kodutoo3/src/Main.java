@@ -1,10 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        Info info = new Info("MacBook", 16, "Intel", "1080p");
-        Computer computer = new Computer(info, 1000, "Euronics");
+        Computer computer = new Computer(new Info("MacBook", 16, "Intel", "1080p"), 1000, "Euronics");
         computer.changeStore("ONOFF");
         computer.info.changeName("Mac Pro");
-        System.out.println(computer.store + " " + computer.info.name + " " + computer.cost + "€" + computer.info.ram + " RAM");
+        System.out.println(computer.store + " " + computer.info.name + " " + computer.cost + "€ " + computer.info.ram + " RAM");
 
         Computer computer2 = new Computer(new Info("Dell", 32, "Intel", "720p"), 1100, "ONOFF");
         computer2.getDiscount(200);
