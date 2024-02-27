@@ -15,9 +15,6 @@ public class Main {
         numbers.add(1.0);
         numbers.add(3.0);
         numbers.add(5.0);
-        numbers.add(8.0);
-        numbers.add(7.0);
-        numbers.add(9.0);
         List<Double> average2 = calculateSlidingAverage(numbers);
         System.out.println("Libisev keskmine: " + average2);
 
@@ -27,6 +24,16 @@ public class Main {
         average1.addNumber(10.0);
         List<Double> slidingAverage3 = average1.getNumbersAverage();
         System.out.println(slidingAverage3);
+
+        //-----------------------------------------------------------
+
+        List<Double> xCoords = new ArrayList<>();
+        List<Double> yCoords = new ArrayList<>();
+        Triangle coords1 = new Triangle();
+        coords1.addCoords(5,7);
+        coords1.addCoords(7,7);
+        coords1.addCoords(-2,4);
+        coords1.printOutCoords();
     }
 
     public static double calculateAverage(double num1, double num2, double num3) {
