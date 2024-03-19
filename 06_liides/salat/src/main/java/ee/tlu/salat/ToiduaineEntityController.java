@@ -15,13 +15,23 @@ public class ToiduaineEntityController {
         return toiduained;
     }
 
-    @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}") // POST (postman)
-    public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik) {
-        if (valk + rasv + sysivesik > 100) {
+//    @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}") // POST (postman)
+//    public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik) {
+//        if (valk + rasv + sysivesik > 100) {
+//            return toiduained;
+//        }
+//        ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
+//        toiduained.add(toiduaine);
+//        return toiduained;
+//    }
+
+    @PostMapping("toiduained") // POST (postman)
+    public List<ToiduaineEntity> lisaToiduaine(@RequestBody ToiduaineEntity toiduaineEntity) {
+        if (toiduaineEntity.valk + toiduaineEntity.rasv + toiduaineEntity.sysivesik > 100) {
             return toiduained;
         }
-        ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-        toiduained.add(toiduaine);
+        //ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
+        toiduained.add(toiduaineEntity);
         return toiduained;
     }
 
