@@ -8,50 +8,62 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ToiduaineEntityController {
-    List<ToiduaineEntity> toiduained = new ArrayList<>();
+    ToiduaineRepository toiduaineRepository;
+
+    public ToiduaineEntityController(ToiduaineRepository toiduaineRepository) {
+        this.toiduaineRepository = toiduaineRepository;
+    }
+
+    //List<ToiduaineEntity> toiduained = new ArrayList<>();
 
     @GetMapping("toiduained")  // brauser
     public List<ToiduaineEntity> saaToiduained() {
-        return toiduained;
+        return toiduaineRepository.findAll();
     }
 
-//    @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}") // POST (postman)
-//    public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik) {
-//        if (valk + rasv + sysivesik > 100) {
-//            return toiduained;
-//        }
-//        ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-//        toiduained.add(toiduaine);
-//        return toiduained;
-//    }
+    @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}") // POST (postman)
+    public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik) {
+        if (valk + rasv + sysivesik > 100) {
+            return toiduaineRepositorypcRepositorypcRepository;
+        }
+        ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
+        toiduaineRepository.save(toiduaine);
+        return toiduaineRepository.findAll();
+    }
 
     @PostMapping("toiduained") // POST (postman)
     public List<ToiduaineEntity> lisaToiduaine(@RequestBody ToiduaineEntity toiduaineEntity) {
         if (toiduaineEntity.valk + toiduaineEntity.rasv + toiduaineEntity.sysivesik > 100) {
-            return toiduained;
+            return toiduaineRepository.findAll();
         }
         //ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-        toiduained.add(toiduaineEntity);
-        return toiduained;
+        toiduaineRepository.save(toiduaineEntity);
+        return toiduaineRepository.findAll();
     }
 
-    @DeleteMapping("toiduained/{index}")  // DELETE
-    public List<ToiduaineEntity> kustutaToiduaine(@PathVariable int index) {
-        toiduained.remove(index);
-        return toiduained;
+    @DeleteMapping("toiduained/{nimi}")  // DELETE
+    public List<ToiduaineEntity> kustutaToiduaine(@PathVariable String nimi) {
+        toiduaineRepository.deleteById(nimi);
+        return toiduaineRepository.findAll();
     }
 
     // http://localhost:8080/api/toiduained?index=0&nimetus="munad"
     @PutMapping("toiduained") // PUT
     public List<ToiduaineEntity> muudaToiduaine(@RequestParam int index, @RequestParam String nimi, @RequestParam int valk, @RequestParam int rasv, @RequestParam int sysivesik) {
         ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-        toiduained.set(index, toiduaine);
-        return toiduained;
+        //toiduained.set(index, toiduaine);
+        toiduaineRepository.save(toiduaine);
+        return toiduaineRepository.findAll();
     }
 
-    @GetMapping("toiduained/{index}") // brauser
-    public ToiduaineEntity saaYksToiduaine(@PathVariable int index) {
-        return toiduained.get(index);
+    @GetMapping("toiduained/{nimi}") // brauser
+    public ToiduaineEntity saaYksToiduaine(@PathVariable String nimi) {
+        return toiduaineRepository.findById(nimi).get();
+    }
+
+    @GetMapping("toiduainedte-koguarv") // brauser
+    public int toiduaineteKoguarv() {
+        return toiduaineRepository.findAll().size();
     }
 
 }
