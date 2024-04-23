@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class ToiduaineEntityController {
     ToiduaineRepository toiduaineRepository;
@@ -24,7 +25,7 @@ public class ToiduaineEntityController {
     @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}") // POST (postman)
     public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik) {
         if (valk + rasv + sysivesik > 100) {
-            return toiduaineRepositorypcRepositorypcRepository;
+            return toiduaineRepository.findAll();
         }
         ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
         toiduaineRepository.save(toiduaine);

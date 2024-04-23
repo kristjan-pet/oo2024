@@ -1,23 +1,69 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [kogus, setKogus] = useState(0);
+  const [toiduained, setToiduained] = useState([]);
+  const nimiRef = useRef();
+  const valkRef = useRef();
+  const rasvRef = useRef();
+  const sysivesikRef = useRef();
+
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/toiduained")
+      .then(response => response.json())
+      .then(json => {
+        setKogus(json.length);
+        setToiduained(json);
+      })
+  }, []);
+
+  function kustuta(primaarvoti) {
+    fetch("http://localhost:8080/api/toiduained/" + primaarvoti, {"method": "DELETE"})
+      .then(response => response.json())
+      .then(json => {
+        setKogus(json.length);
+        setToiduained(json);
+      })
+  }
+  
+  function lisa(){
+    if (nimiRef.current.value.trim() === "") {
+      return;
+    }
+    const toiduaine = {
+      "nimetus": nimiRef.current.value,
+      "valk": valkRef.current.value,
+      "rasv": rasvRef.current.value,
+      "sysivesik": sysivesikRef.current.value
+    }
+    fetch("http://localhost:8080/api/toiduained", {"method": "POST", "body": JSON.stringify(toiduaine), "headers": {"Content-Type": "application/json"}})
+      .then(response => response.json())
+      .then(json => {
+        setKogus(json.length);
+        setToiduained(json);
+      })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Mul on {kogus} toiduainet.
+      <br /><br />
+
+      <label>Toiduaine nimi</label> <br/>
+      <input ref={nimiRef} type="text" /> <br />
+      <label>Valk</label> <br/>
+      <input ref={valkRef} type="text" /> <br />
+      <label>Rasv</label> <br/>
+      <input ref={rasvRef} type="text" /> <br />
+      <label>Sysivesik</label> <br/>
+      <input ref={sysivesikRef} type="text" /> <br />
+      <button onClick={() => lisa()}>Sisesta</button> <br />
+      <br />
+
+      {toiduained.map(t => <div>{t.nimetus} <button onClick={() => kustuta(t.nimetus)}>x</button></div>)}
     </div>
   );
 }

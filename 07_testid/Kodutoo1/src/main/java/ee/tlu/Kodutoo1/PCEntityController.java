@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class PCEntityController {
     PCRepository pcRepository;
@@ -27,6 +28,12 @@ public class PCEntityController {
     public List<PCEntity> lisaNumber(@PathVariable String nimetus, @PathVariable String valmistaja, @PathVariable int maksumus) {
         PCEntity arvuti = new PCEntity(nimetus, valmistaja, maksumus);
         pcRepository.save(arvuti);
+        return pcRepository.findAll();
+    }
+
+    @PostMapping("arvutid") // POST (postman)
+    public List<PCEntity> lisaPC(@RequestBody PCEntity pcEntity) {
+        pcRepository.save(pcEntity);
         return pcRepository.findAll();
     }
 
