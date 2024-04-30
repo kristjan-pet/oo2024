@@ -1,4 +1,4 @@
-package ee.tlu.Kodutoo1;
+package ee.tlu.Kodutoo1.controller;
 
 
 import org.springframework.web.bind.annotation.*;

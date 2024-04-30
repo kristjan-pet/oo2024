@@ -1,4 +1,4 @@
-package ee.tlu.Kodutoo1;
+package ee.tlu.Kodutoo1.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PCEntity {
     @Id
-    String nimetus;
-    String valmistaja;
-    int maksumus;
+    private String nimetus;
+    private String valmistaja;
+    private int maksumus;
 
 //    public PCEntity(String nimetus, String valmistaja, int maksumus) {
 //        this.nimetus = nimetus;
