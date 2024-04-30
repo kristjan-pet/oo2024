@@ -1,21 +1,18 @@
-package ee.tlu.Kodutoo1;
+package ee.tlu.Kodutoo1.controller;
 
+import ee.tlu.Kodutoo1.entity.PCEntity;
+import ee.tlu.Kodutoo1.repository.PCRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class PCEntityController {
+    @Autowired
     PCRepository pcRepository;
-
-    public PCEntityController(PCRepository pcRepository) {
-        this.pcRepository = pcRepository;
-    }
-
-    //List<PCEntity> arvutid = new ArrayList<>();
 
     // (brauser) http://localhost:8080/api/arvutid/
     @GetMapping("arvutid")
@@ -62,8 +59,18 @@ public class PCEntityController {
     public int saaArvutiteMakusmuseSumma() {
         int summa = 0;
         for (int i = 0; i < pcRepository.findAll().size(); i++) {
-            summa += pcRepository.findAll().get(i).maksumus;
+            summa += pcRepository.findAll().get(i).getMaksumus();
         }
         return summa;
+    }
+
+    @GetMapping("arvutid-maksumus-min/{minMaksumus}")
+    public List<PCEntity> pcMinMaksumus(@PathVariable int minMaksumus) {
+        return pcRepository.findAllByMaksumusGreaterThan(minMaksumus);
+    }
+
+    @GetMapping("arvutid-valmistaja/{valmistaja}")
+    public List<PCEntity> pcValmistaja(@PathVariable String valmistaja) {
+        return pcRepository.findAllByValmistaja(valmistaja);
     }
 }
