@@ -6,3 +6,5 @@ Teise kontrolltöö tulemus on eksamihinde aluseks:
 3 punkti - A
 
 Muude kursusel esitavate tööde abil saab hinnet mõlemas suunas mõjutada. 
+
+https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.2.5&packaging=jar&jvmVersion=17&groupId=ee.tlu&artifactId=test0&name=test0&description=OOP%20Spring%20Salatiprojekt&packageName=ee.tlu.test0&dependencies=lombok,web,postgresql,h2,data-jpa
